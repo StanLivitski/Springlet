@@ -72,8 +72,8 @@
         	<package name="name.livitski.tools.springlet.commands" />
         	<package name="name.livitski.tools.springlet" />
             <link href="http://docs.oracle.com/javase/6/docs/api/" />
-        	<link href="../lib.ref/spring-beans-javadoc" />
-        	<link href="../lib.ref/spring-core-javadoc" />
+        	<!--link href="../lib.ref/spring-beans-javadoc" /-->
+        	<!--link href="../lib.ref/spring-core-javadoc" /-->
         	<!--link href="../lib.ref/commons-logging-javadoc.jar" /-->
         </javadoc>
     </target>
