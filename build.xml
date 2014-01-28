@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <!--
- |    Copyright © 2013 Konstantin "Stan" Livitski
+ |    Copyright © 2013, 2014 Konstantin "Stan" Livitski
  | 
  |    This file is part of Springlet. Springlet is
  |    licensed under the Apache License, Version 2.0 (the "License");
@@ -20,6 +20,7 @@
     	Springlet - lightweight command line facade for modular Java applications.
     </description>
 	<property name="source.dir" location="${basedir}/src" />
+	<property name="extras.dir" location="${basedir}/extras" />
 	<property name="build.dir.rel" value="build" />
 	<property name="build.dir" location="${basedir}/${build.dir.rel}" />
 	<property name="dest.jar.rel" value="springlet.jar" />
@@ -40,16 +41,32 @@
     	<jar destfile="${dest.jar.path}" basedir="${build.dir}" update="false" duplicate="fail" />
     </target>
 
-    <target name="compile" description="Compiles the project's classes">
+	<target name="-depends">
+		<condition property="extras.dir.optional" value="${extras.dir}">
+			<available classname="name.livitski.tools.proper2.Configuration"
+				classpathref="lib.path" />
+		</condition>
+		<property name="extras.dir.optional" value="${source.dir}" />
+	    <path id="source.path">
+	      <pathelement path="${source.dir}"/>
+	      <pathelement path="${extras.dir.optional}"/>
+	    </path>
+    </target>
+
+    <target name="compile" depends="-depends" description="Compiles the project's classes">
     	<delete dir="${build.dir}" quiet="true" />
     	<mkdir dir="${build.dir}" />
     	<javac destdir="${build.dir}"
     		debug="true" debuglevel="lines,source" source="6" target="6">
-    		<src path="${source.dir}" />
+    		<src refid="source.path" />
     		<classpath refid="lib.path" />
     	</javac>
     	<copy todir="${build.dir}" preservelastmodified="true">
 			<fileset dir="${source.dir}">
+				<include name="springlet/**" />
+				<include name="*.properties" />
+			</fileset>
+			<fileset dir="${extras.dir.optional}">
 				<include name="springlet/**" />
 				<include name="*.properties" />
 			</fileset>
@@ -60,18 +77,21 @@
     	</copy>
     </target>
 
-    <target name="javadoc" description="Generates Javadoc from the project's sources">
+    <target name="javadoc" depends="-depends"
+    	description="Generates Javadoc from the project's sources">
     	<delete dir="${javadoc.dir}" quiet="true" />
     	<mkdir dir="${javadoc.dir}" />
         <javadoc access="protected" author="true"
         	destdir="${javadoc.dir}" doctitle="${ant.project.name} project"
         	nodeprecated="false" nodeprecatedlist="false"
         	noindex="false" nonavbar="false" notree="false" classpathref="lib.path"
-        	source="6" sourcepath="${source.dir}" splitindex="true" use="true" version="true">
+        	source="6" sourcepathref="source.path" splitindex="true" use="true" version="true">
         	<source file="${source.dir}/run.java" />
         	<package name="name.livitski.tools.springlet.commands" />
+        	<package name="name.livitski.tools.springlet.config" />
         	<package name="name.livitski.tools.springlet" />
             <link href="http://docs.oracle.com/javase/6/docs/api/" />
+        	<link href="file://${basedir}/../proper2/javadoc/" />
         	<!--link href="../lib.ref/spring-beans-javadoc" /-->
         	<!--link href="../lib.ref/spring-core-javadoc" /-->
         	<!--link href="../lib.ref/commons-logging-javadoc.jar" /-->

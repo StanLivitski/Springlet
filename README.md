@@ -1,5 +1,5 @@
 <!--
- |    Copyright © 2013 Konstantin "Stan" Livitski
+ |    Copyright © 2013, 2014 Konstantin "Stan" Livitski
  | 
  |    This file is part of Springlet. Springlet is
  |    licensed under the Apache License, Version 2.0 (the "License");
@@ -42,9 +42,11 @@ on the classpath both when compiling Springlet and using it.
 <col />
 <col width="20%" />
 <col width="20%" />
+<col width="20%" />
 <thead>
 <tr>
 <th>Library or framework</th>
+<th>Importance</th>
 <th>Module</th>
 <th>Tested with version</th>
 </tr>
@@ -53,20 +55,30 @@ on the classpath both when compiling Springlet and using it.
 <tr>
 <td><a href="http://commons.apache.org/proper/commons-logging/download_logging.cgi">
 Apache Commons Logging</a></td>
+<td>required</td>
 <td>-</td>
 <td>1.1.1</td>
 </tr>
 <tr>
 <td><a href="http://projects.spring.io/spring-framework/#quick-start">
 Spring Framework</a></td>
+<td>required</td>
 <td>spring-core</td>
 <td>3.2.4.RELEASE</td>
 </tr>
 <tr>
 <td><a href="http://projects.spring.io/spring-framework/#quick-start">
 Spring Framework</a></td>
+<td>required</td>
 <td>spring-beans</td>
 <td>3.2.4.RELEASE</td>
+</tr>
+<tr>
+<td><a href="https://github.com/StanLivitski/proper2">
+proper2</a></td>
+<td>optional</td>
+<td>-</td>
+<td>current stable version</td>
 </tr>
 </tbody>
 </table>
@@ -152,12 +164,12 @@ To build the framework's binary from this repository, you need:
    - [Dependency libraries](#sec-depends), or links thereto in the `lib/`
    subdirectory of your working copy.
 
-To build Springlet, go to the directory containing a working copy of Springlet
-and run:
+To build the core of Springlet, go to the directory containing a working copy of
+Springlet and run:
 
      ant
 
-The result is a file named `springlet.jar` in the same directory. 
+The result is a file named `springlet.jar` in the same directory.
 
 <a name="sec-javadoc"> </a>
 Building Javadoc
