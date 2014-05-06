@@ -1,5 +1,5 @@
 /**
- *    Copyright © 2013, 2014 Konstantin Livitski
+ *    Copyright © 2013, 2014 Konstantin "Stan" Livitski
  *     
  *    This file is part of Springlet. Springlet is
  *    licensed under the Apache License, Version 2.0 (the "License");
@@ -94,6 +94,12 @@ public abstract class ConfigurableApplicationBean<Status extends Enum<Status>>
  	throws ConfigurationException
  {
   return getConfig().readSetting(clazz);
+ }
+
+ protected <T, D extends AbstractSetting<D,T>> T readSetting(AbstractSetting<D,T> handler)
+ 	throws ConfigurationException
+ {
+  return getConfig().readSetting(handler);
  }
 
  /**

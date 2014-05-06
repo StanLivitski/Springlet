@@ -83,6 +83,8 @@ public class HelpCommand extends Command implements BeanFactoryAware
      tag = COMMAND_PREFIX + tag.substring(Launcher.BEAN_NAME_PREFIX_COMMAND.length());
     else if (tag.startsWith(Launcher.BEAN_NAME_PREFIX_SWITCH))
      tag = SWITCH_PREFIX + tag.substring(Launcher.BEAN_NAME_PREFIX_SWITCH.length());
+    else if (tag.equals(Launcher.BEAN_NAME_DEFAULT_HANDLER))
+     continue;
     if (0 != tagSpec.length())
      tagSpec.append(", ");
     tagSpec.append(tag);
