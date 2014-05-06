@@ -65,5 +65,11 @@ public class ConfigurableBean extends Logging
   return getConfiguration().readSetting(clazz);
  }
 
+ protected <T, D extends AbstractSetting<D,T>> T readSetting(AbstractSetting<D,T> handler)
+ 	throws ConfigurationException
+ {
+  return getConfiguration().readSetting(handler);
+ }
+
  private Configuration config;
 }
