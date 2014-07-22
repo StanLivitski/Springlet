@@ -274,7 +274,9 @@ public class Launcher extends Logging
   if (null == beanFactory)
   {
    beanFactory = new DefaultListableBeanFactory();
-   new XmlBeanDefinitionReader(beanFactory).loadBeanDefinitions(MAIN_BEAN_CONFIG_FILE);
+   final XmlBeanDefinitionReader xmlReader = new XmlBeanDefinitionReader(beanFactory);
+   xmlReader.setValidating(false);
+   xmlReader.loadBeanDefinitions(MAIN_BEAN_CONFIG_FILE);
   }
   return beanFactory;
  }

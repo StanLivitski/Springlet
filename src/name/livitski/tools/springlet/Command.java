@@ -64,7 +64,9 @@ public abstract class Command extends Logging
   * arguments in the proper order and informs the user which
   * arguments are optional, which ones are repeatable, and how
   * many times they can be repeated. Typically, the return value
-  * string of a loose BNF form, no more than 140 characters long. 
+  * string of a loose BNF form, no more than 140 characters long.
+  * @return a string with arguments' info, or <code>null</code>
+  * if this command accepts no arguments 
   */
  public abstract String getArgSpec();
 
